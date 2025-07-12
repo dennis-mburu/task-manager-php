@@ -58,6 +58,27 @@ button:hover,
   transform: translateY(-0.05rem);
 }
 
+.logout-button {
+  background-color: #d83142;
+  justify-self: flex-end;
+}
+
+.logout-button:hover {
+  background-color: #a32b3a;
+  transform: translateY(-0.05rem);
+}
+
+i {
+  margin-right: 0.5rem;
+}
+
+.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+}
+
 /* Forms */
 form {
   margin: 1rem 0;
