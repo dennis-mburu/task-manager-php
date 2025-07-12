@@ -55,7 +55,30 @@ $user_id = $_SESSION['user_id'];
         <?php
         $result = mysqli_query($conn, "SELECT * FROM tasks WHERE assigned_to = $user_id");
         while ($task = mysqli_fetch_assoc($result)) {
-            echo "<li><strong>" . htmlspecialchars($task['title']) . "</strong> – " . htmlspecialchars($task['status']) . " (Due: " . htmlspecialchars($task['deadline']) . ")</li>";
+            echo "<li>";
+            echo "<strong>{$task['title']}</strong> – {$task['status']} (Due: {$task['deadline']})";
+
+            // 🎯 Only show status update form if task is not Completed
+            if ($task['status'] !== 'Completed') {
+                echo "<form method='POST' action='update_task.php' style='display:inline; margin-left:10px;'>";
+                echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
+
+                // Set next status
+                $nextStatus = match ($task['status']) {
+                    'Pending' => 'In Progress',
+                    'In Progress' => 'Completed',
+                    default => null
+                };
+
+                if ($nextStatus) {
+                    echo "<input type='hidden' name='new_status' value='{$nextStatus}'>";
+                    echo "<button type='submit'>Mark as {$nextStatus}</button>";
+                }
+
+                echo "</form>";
+            }
+
+            echo "</li>";
         }
         ?>
     </ul>
