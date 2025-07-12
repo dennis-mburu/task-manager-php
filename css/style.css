@@ -1,0 +1,183 @@
+/* Global Reset and Box Sizing */
+* {
+  /* margin: 0;
+  padding: 0; */
+  box-sizing: border-box;
+}
+
+/* Base Typography and Layout */
+html {
+  font-size: 16px; /* 1rem = 16px baseline */
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+  padding: 2rem;
+  line-height: 1.6;
+  animation: fadeInBody 0.6s ease-in;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* Header */
+header {
+  background-color: #007bff;
+  color: white;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.5s ease-out;
+}
+
+header a {
+  color: white;
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+/* Buttons */
+button,
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #0056b3;
+  transform: translateY(-0.05rem);
+}
+
+/* Forms */
+form {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: white;
+  border: 0.05rem solid #ddd;
+  border-radius: 0.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  margin-top: 0.4rem;
+  width: 100%;
+  border-radius: 0.4rem;
+  border: 0.05rem solid #ccc;
+  font-size: 1rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 0.1rem 0.4rem rgba(0, 0, 0, 0.08);
+  animation: fadeInCard 0.4s ease;
+}
+
+/* Task Status Labels */
+.status {
+  font-weight: bold;
+}
+
+.status.Pending {
+  color: orange;
+}
+
+.status.InProgress {
+  color: dodgerblue;
+}
+
+.status.Completed {
+  color: green;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  font-size: 0.875rem;
+  color: #888;
+}
+
+/* Animations */
+@keyframes fadeInBody {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive Adjustments */
+/* @media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  form,
+  .card {
+    padding: 0.8rem;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+    padding: 0.7rem;
+  }
+} */

@@ -43,12 +43,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Login – Task Manager</title>
+<head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Login – Task Manager</title>
 </head>
 
 <body>
+    <?php include 'includes/header.php'; ?>
+
     <h2>Login</h2>
 
     <!-- Display error message if any -->
@@ -66,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Login</button>
     </form>
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
