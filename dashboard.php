@@ -26,10 +26,11 @@ $user_id = $_SESSION['user_id'];
 
 <body>
 
-    <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2> 
+    <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
     <p>Role: <?php echo $role; ?></p>
     <p><a href="logout.php">Logout</a></p>
 
+    <!-- Show this section only if user is admin -->
     <?php if ($role === 'admin'): ?>
         <h3>Admin Controls</h3>
         <ul>
@@ -42,22 +43,22 @@ $user_id = $_SESSION['user_id'];
             <?php
             $result = mysqli_query($conn, "SELECT id, username, email FROM users");
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<li>{$row['username']} ({$row['email']})</li>";
-            }
-            ?>
-        </ul>
-
-    <?php else: ?>
-        <h3>Your Tasks</h3>
-        <ul>
-            <?php
-            $result = mysqli_query($conn, "SELECT * FROM tasks WHERE assigned_to = $user_id");
-            while ($task = mysqli_fetch_assoc($result)) {
-                echo "<li><strong>{$task['title']}</strong> – {$task['status']} (Due: {$task['deadline']})</li>";
+                echo "<li>" . htmlspecialchars($row['username']) . " (" . htmlspecialchars($row['email']) . ")</li>";
             }
             ?>
         </ul>
     <?php endif; ?>
+
+    <!-- This section is for all users, including admin -->
+    <h3>Your Tasks</h3>
+    <ul>
+        <?php
+        $result = mysqli_query($conn, "SELECT * FROM tasks WHERE assigned_to = $user_id");
+        while ($task = mysqli_fetch_assoc($result)) {
+            echo "<li><strong>" . htmlspecialchars($task['title']) . "</strong> – " . htmlspecialchars($task['status']) . " (Due: " . htmlspecialchars($task['deadline']) . ")</li>";
+        }
+        ?>
+    </ul>
 
 </body>
 
