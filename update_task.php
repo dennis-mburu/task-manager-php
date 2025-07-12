@@ -1,14 +1,11 @@
 <?php
 // update_task.php
 
-session_start();
-include 'db.php';
+include 'includes/db.php';
+include 'includes/auth.php';
 
 // ✅ Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit;
-}
+requireLogin();
 
 $user_id = $_SESSION['user_id'];
 

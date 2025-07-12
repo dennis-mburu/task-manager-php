@@ -1,15 +1,12 @@
 <?php
 // add_task.php
 
-session_start();
-include 'db.php';
+include 'includes/db.php';
+include 'includes/auth.php';
 include 'utils/mail.php';
 
 // ✅ Only allow admins
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php");
-    exit;
-}
+requireAdmin();
 
 $error = "";
 $success = "";
@@ -45,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
                 $error = "Task was created, but failed to send email.";
             }
-
-            
         } else {
             $error = "❌ Failed to assign task: " . mysqli_error($conn);
         }
@@ -56,9 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Assign Task – Task Manager</title>
 </head>
+
 <body>
     <h2>Assign New Task</h2>
     <p><a href="dashboard.php">← Back to Dashboard</a></p>
@@ -95,4 +92,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Assign Task</button>
     </form>
 </body>
+
 </html>

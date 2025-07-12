@@ -1,14 +1,10 @@
 <?php
 // dashboard.php
 
-session_start();
-include 'db.php';
+include 'includes/db.php';
+include 'includes/auth.php';
 
-// Redirect if user is not logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit;
-}
+requireLogin();
 
 // Get session details
 $username = $_SESSION['username'];

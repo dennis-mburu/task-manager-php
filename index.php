@@ -1,7 +1,7 @@
 <?php
 session_start(); // Start/resume session for using $_SESSION variables
 
-include 'db.php'; // Include database connection settings
+include 'includes/db.php'; // Include database connection settings
 
 $error = ""; // Initialize error message variable
 
@@ -42,10 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Login – Task Manager</title>
     <meta charset="UTF-8">
 </head>
+
 <body>
     <h2>Login</h2>
 
@@ -65,4 +67,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Login</button>
     </form>
 </body>
+
 </html>

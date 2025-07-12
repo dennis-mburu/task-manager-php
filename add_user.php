@@ -1,14 +1,11 @@
 <?php
 // add_user.php
 
-session_start();
-include 'db.php';
+include 'includes/db.php';
+include 'includes/auth.php'; 
 
-// Check if user is logged in and is admin since only admins should access this page
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php"); // If not logged in or not admin, redirect to login
-    exit;
-}
+// ✅ Only allow admins
+requireAdmin();
 
 $error = "";
 $success = "";
@@ -40,9 +37,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Add User – Task Manager</title>
 </head>
+
 <body>
     <h2>Add New User</h2>
     <p><a href="dashboard.php">← Back to Dashboard</a></p>
@@ -73,4 +72,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Add User</button>
     </form>
 </body>
+
 </html>
