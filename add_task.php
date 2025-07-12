@@ -3,6 +3,7 @@
 
 session_start();
 include 'db.php';
+include 'utils/mail.php';
 
 // ✅ Only allow admins
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -33,7 +34,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mysqli_query($conn, $sql)) {
             $success = "✅ Task assigned successfully.";
 
-            // 🚨 We'll trigger the email in the next step
+            // Get the assigned user's email
+            $userResult = mysqli_query($conn, "SELECT email FROM users WHERE id = $assigned_to");
+            $userRow = mysqli_fetch_assoc($userResult);
+            $userEmail = $userRow['email'];
+
+            // Send email notification
+            if (sendTaskEmail($userEmail, $title, $deadline)) {
+                $success .= " Email sent to user.";
+            } else {
+                $error = "Task was created, but failed to send email.";
+            }
+
+            
         } else {
             $error = "❌ Failed to assign task: " . mysqli_error($conn);
         }
