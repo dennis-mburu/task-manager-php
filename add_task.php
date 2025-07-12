@@ -52,11 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 
-<head>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assign Task – Task Manager</title>
 </head>
 
 <body>
+    <?php include 'includes/header.php'; ?>
+
     <h2>Assign New Task</h2>
     <p><a href="dashboard.php">← Back to Dashboard</a></p>
 
@@ -91,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Assign Task</button>
     </form>
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>

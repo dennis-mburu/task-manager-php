@@ -2,7 +2,7 @@
 // add_user.php
 
 include 'includes/db.php';
-include 'includes/auth.php'; 
+include 'includes/auth.php';
 
 // ✅ Only allow admins
 requireAdmin();
@@ -36,13 +36,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User – Task Manager</title>
 </head>
 
 <body>
+    <?php include 'includes/header.php'; ?>
+
     <h2>Add New User</h2>
     <p><a href="dashboard.php">← Back to Dashboard</a></p>
 
@@ -71,6 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <button type="submit">Add User</button>
     </form>
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>

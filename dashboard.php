@@ -12,19 +12,18 @@ $role = $_SESSION['role'];
 $user_id = $_SESSION['user_id'];
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Dashboard – Task Manager</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – Task Manager</title>
 </head>
 
 <body>
-
-    <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
-    <p>Role: <?php echo $role; ?></p>
-    <p><a href="logout.php">Logout</a></p>
+    <?php include 'includes/header.php'; ?>
 
     <!-- Show this section only if user is admin -->
     <?php if ($role === 'admin'): ?>
@@ -54,7 +53,7 @@ $user_id = $_SESSION['user_id'];
             echo "<li>";
             echo "<strong>{$task['title']}</strong> – {$task['status']} (Due: {$task['deadline']})";
 
-            // 🎯 Only show status update form if task is not Completed
+            // 🎯 Only show status update form (button) if task is not Completed
             if ($task['status'] !== 'Completed') {
                 echo "<form method='POST' action='update_task.php' style='display:inline; margin-left:10px;'>";
                 echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
@@ -78,7 +77,7 @@ $user_id = $_SESSION['user_id'];
         }
         ?>
     </ul>
-
+    <?php include 'includes/footer.php'; ?>
 </body>
 
 </html>
