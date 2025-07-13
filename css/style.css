@@ -393,11 +393,26 @@ button[disabled] {
 }
 
 /* Footer */
-footer {
+.app-footer {
+  background-color: var(--card-bg);
+  padding: 2rem 1rem;
   text-align: center;
-  margin-top: 3rem;
-  font-size: 0.875rem;
-  color: #888;
+  margin-top: 0;
+  border-top: 1px solid var(--border-light);
+  box-shadow: 0 -0.2rem 0.6rem rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
+  color: var(--text-color);
+  animation: fadeIn 0.6s ease-in;
+}
+
+.app-footer .footer-content p {
+  margin: 0.3rem 0;
+  opacity: 0.8;
+}
+
+.app-footer i {
+  color: var(--accent-color);
+  margin-right: 0.4rem;
 }
 
 @keyframes fadeIn {
@@ -411,10 +426,6 @@ footer {
   }
 }
 /* end of modal css */
-
-.back-nav {
-  /* margin: 0; */
-}
 
 /* start of back navigation */
 
