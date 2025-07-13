@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result); // Get user data as associative array
 
-        // Compare entered password with stored password (plain text for now, will hash later
-        if ($password === $user['password']) {
+        // verify the hashed password
+        if (password_verify($password, $user['password'])) {
             // Store user data in session variables
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];

@@ -15,7 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Collect form input and sanitize
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = $_POST['password']; // Password is raw for now — will hash later
+    $password = $_POST['password'];
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $role = $_POST['role'];
 
     // Basic validation
@@ -24,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         // Insert user into DB
         $sql = "INSERT INTO users (username, email, password, role)
-                VALUES ('$username', '$email', '$password', '$role')";
+                VALUES ('$username', '$email', '$hashedPassword', '$role')";
 
         if (mysqli_query($conn, $sql)) {
             $success = "✅ User added successfully.";
