@@ -8,7 +8,7 @@ $role = $_SESSION['role'];
 
 // Fetch only the logged-in user's tasks
 $taskResult = mysqli_query($conn, "
-    SELECT tasks.*, users.email AS user_email 
+    SELECT tasks.*, users.email AS user_email, users.username as user_name 
     FROM tasks 
     JOIN users ON tasks.assigned_to = users.id 
     WHERE assigned_to = $userId 
@@ -80,7 +80,7 @@ $taskResult = mysqli_query($conn, "
                             echo "<tr class='{$rowClass}'>";
                             echo "<td>{$counter}</td>";
                             echo "<td>" . htmlspecialchars($task['title']) . "</td>";
-                            echo "<td>" . htmlspecialchars($task['user_email']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['user_name']) . "</td>";
                             echo "<td>" . htmlspecialchars($task['deadline']) . "</td>";
                             echo "<td><span class='status {$className}'>" . htmlspecialchars($status) . "</span></td>";
                             echo "<td>";

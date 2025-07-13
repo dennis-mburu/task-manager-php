@@ -51,9 +51,12 @@ if (!$user) {
 <body>
 
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
 
-    <h2>Edit User</h2>
+    <div class="manage-page-title">
+        <?php include 'includes/back_nav.php'; ?>
+        <h2><i class="fa-solid fa-user-gear"></i>Edit User</h2>
+        <p class="subtext">Update user's personal info.</p>
+    </div>
 
     <?php if (isset($error)): ?>
         <p class="error"><?php echo $error; ?></p>

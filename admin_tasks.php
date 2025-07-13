@@ -31,6 +31,7 @@ $result = mysqli_query($conn, "
 
     <?php include 'includes/header.php'; ?>
     <div class="manage-page-title">
+        <?php include 'includes/back_nav.php'; ?>
         <h2><i class="fa-solid fa-list-check"></i>Manage Tasks</h2>
         <p class="subtext">Browse or delete all assigned tasks across the team.</p>
     </div>

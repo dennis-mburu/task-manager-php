@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <?php include 'includes/header.php'; ?>
     <div class="manage-page-title">
+        <?php include 'includes/back_nav.php'; ?>
         <h2><i class="fa-solid fa-user-gear"></i>Manage Your Profile</h2>
         <p class="subtext">Update your personal info and change your password securely.</p>
     </div>
@@ -69,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
     <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>
 
-    <form method="POST" class="form-card">
+    <form method="POST">
         <label>Username:
             <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
         </label>

@@ -23,6 +23,7 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
 
     <?php include 'includes/header.php'; ?>
     <div class="manage-page-title">
+        <?php include 'includes/back_nav.php'; ?>
         <h2><i class="fa-solid fa-wrench"></i>Manage Users</h2>
         <p class="subtext">View, edit, or remove users from the system.</p>
     </div>
