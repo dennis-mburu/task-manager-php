@@ -69,7 +69,7 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
     <!-- Custom Confirmation Modal -->
     <div id="confirmModal" class="modal hidden">
         <div class="modal-content">
-            <p><i class="fa-solid fa-triangle-exclamation" style="color: red"></i>Are you sure you want to delete this user?</p>
+            <p><i class="fa-solid fa-triangle-exclamation" style="color: red"></i>Are you sure you want to delete this user? This action will also delete all tasks assigned to this user, and cannot be undone!</p>
             <div class="modal-actions">
                 <button onclick="confirmUserDelete()" class="btn danger">Yes, Delete</button>
                 <button onclick="closeModal()" class="btn">Cancel</button>

@@ -18,7 +18,16 @@ if ($_SESSION['user_id'] == $userId) {
     exit;
 }
 
-// Delete user from the database
+// Step 1: Delete all tasks assigned to this user
+$deleteTasks = mysqli_query($conn, "DELETE FROM tasks WHERE assigned_to = $userId");
+
+if (!$deleteTasks) {
+    echo "❌ Failed to delete associated tasks.";
+    exit;
+}
+
+
+// Step 2: Delete the user from the database
 $delete = mysqli_query($conn, "DELETE FROM users WHERE id = $userId");
 
 if ($delete) {

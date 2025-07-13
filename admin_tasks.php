@@ -83,7 +83,7 @@ $result = mysqli_query($conn, "
     <!-- Task Delete Modal -->
     <div id="deleteTaskModal" class="modal hidden">
         <div class="modal-content">
-            <p>⚠️ Are you sure you want to delete this task?</p>
+            <p><i class="fa-solid fa-triangle-exclamation" style="color: red"></i>Are you sure you want to delete this task?</p>
             <div class="modal-actions">
                 <button onclick="confirmTaskDelete()" class="btn danger">Yes, Delete</button>
                 <button onclick="closeTaskModal()" class="btn">Cancel</button>
