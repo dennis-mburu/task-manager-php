@@ -49,8 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
-    <h2>Add New User</h2>
+    <div class="manage-page-title">
+        <h2><i class="fa-solid fa-user-plus"></i>Add New User </h2>
+        <p class="subtext">Create a new user account and assign their role in the team.</p>
+    </div>
+
     <?php if ($error): ?>
         <p style="color:red;"><?php echo $error; ?></p>
     <?php elseif ($success): ?>

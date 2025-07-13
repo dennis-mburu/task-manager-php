@@ -61,9 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
-
-    <h2>Manage Your Profile</h2>
+    <div class="manage-page-title">
+        <h2><i class="fa-solid fa-user-gear"></i>Manage Your Profile</h2>
+        <p class="subtext">Update your personal info and change your password securely.</p>
+    </div>
 
     <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
     <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>

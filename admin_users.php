@@ -22,8 +22,10 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
 <body>
 
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
-    <h2>Manage All Users</h2>
+    <div class="manage-page-title">
+        <h2><i class="fa-solid fa-wrench"></i>Manage Users</h2>
+        <p class="subtext">View, edit, or remove users from the system.</p>
+    </div>
     <?php if (isset($_GET['deleted'])): ?>
         <p class="success">✅ User deleted successfully.</p>
     <?php endif; ?>

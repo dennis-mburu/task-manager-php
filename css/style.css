@@ -25,6 +25,8 @@
 
   --border-light: #5d6d7e;
   --shadow: rgba(0, 0, 0, 0.1);
+
+  --muted-color: #999;
 }
 
 body {
@@ -157,6 +159,37 @@ body {
 i {
   margin-right: 0.5rem;
 }
+
+/* page titles */
+.manage-page-title {
+  text-align: center;
+  /* margin: 2rem auto 2rem; */
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--card-bg);
+  /* max-width: 40rem; */
+}
+
+.manage-page-title h2 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  padding-top: 1rem;
+  margin-bottom: 0.4rem;
+  font-family: "Segoe UI", "Ubuntu", sans-serif;
+}
+
+.manage-page-title i {
+  color: var(--accent-color);
+  font-size: 1.7rem;
+}
+
+.subtext {
+  color: var(--muted-color);
+  line-height: 1.4;
+  padding-bottom: 0.75rem;
+}
+
+/* End of page titles */
 
 /* Forms */
 

@@ -62,8 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
-    <h2>Assign New Task</h2>
+    <div class="manage-page-title">
+        <h2><i class="fa-solid fa-pen-to-square"></i>Assign New task </h2>
+        <p class="subtext">Assign a new task to a team member and set a deadline.</p>
+    </div>
     <?php if ($error): ?>
         <p style="color:red;"><?php echo $error; ?></p>
     <?php elseif ($success): ?>

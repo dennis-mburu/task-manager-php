@@ -30,9 +30,10 @@ $result = mysqli_query($conn, "
 <body>
 
     <?php include 'includes/header.php'; ?>
-    <?php include 'includes/back_nav.php'; ?>
-
-    <h2>Manage All Tasks</h2>
+    <div class="manage-page-title">
+        <h2><i class="fa-solid fa-list-check"></i>Manage Tasks</h2>
+        <p class="subtext">Browse or delete all assigned tasks across the team.</p>
+    </div>
 
     <?php if (isset($_GET['deleted'])): ?>
         <p class="success">✅ Task deleted successfully.</p>
