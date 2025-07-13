@@ -16,7 +16,7 @@ body {
   color: #333;
   padding: 2rem;
   line-height: 1.6;
-  animation: fadeInBody 0.6s ease-in;
+  /* animation: fadeInBody 0.6s ease-in; */
   max-width: 1200px;
   margin-inline: auto;
 }
@@ -105,58 +105,78 @@ label {
   font-weight: 600;
 }
 
-
 /* Table Wrapper for Responsiveness */
 .table-wrapper {
-    overflow-x: auto;
-    margin-top: 2rem;
+  overflow-x: auto;
+  margin-top: 2rem;
 }
 
 /* Responsive Stylish Table */
 .styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.95rem;
-    min-width: 40rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.05);
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  min-width: 40rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.05);
 }
 
 .styled-table thead {
-    background-color: #007bff;
-    color: #ffffff;
-    text-align: left;
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 0.75rem 1rem;
-    border-bottom: 0.05rem solid #e3e3e3;
+  padding: 0.75rem 1rem;
+  border-bottom: 0.05rem solid #e3e3e3;
 }
 
 .styled-table tr:hover {
-    background-color: #f1f5ff;
-    transition: background 0.2s ease-in-out;
+  background-color: #f1f5ff;
+  transition: background 0.2s ease-in-out;
+  color: black;
 }
 
 /* Smaller button style */
 .btn.small {
-    padding: 0.4rem 0.75rem;
-    font-size: 0.85rem;
-    margin-right: 0.3rem;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  margin-right: 0.3rem;
 }
 
 /* Danger (delete) button */
 .btn.danger {
-    background-color: #dc3545;
+  background-color: #dc3545;
 }
 
 .btn.danger:hover {
-    background-color: #b02a37;
+  background-color: #b02a37;
 }
 /* End of table wrapper */
+
+/* Admin navigation section */
+.admin-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+}
+
+.admin-nav a.btn {
+  flex: 1 1 12rem;
+  background-color: #28a745;
+  text-align: center;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.admin-nav a.btn:hover {
+  background-color: #218838;
+}
 
 /* Cards */
 /* .card {
@@ -183,6 +203,19 @@ label {
 
 .status.Completed {
   color: green;
+}
+
+/* Strike-through effect for completed task rows */
+.task-completed td {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+make disabled buttons more visually distinct */
+button[disabled] {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
 
 /* Footer */
