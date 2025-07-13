@@ -92,7 +92,7 @@ $taskResult = mysqli_query($conn, "
                             };
 
                             if ($nextStatus) {
-                                echo "<form method='POST' action='update_task.php' style='display:inline'>";
+                                echo "<form method='POST' action='update_task.php' style='display:inline' class='update-task-form'>";
                                 echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
                                 echo "<input type='hidden' name='new_status' value='{$nextStatus}'>";
                                 echo "<button type='submit'>Mark as {$nextStatus}</button>";

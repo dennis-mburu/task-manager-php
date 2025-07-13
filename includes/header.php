@@ -1,7 +1,7 @@
 <header class="header">
     <div class="header-container">
         <h1 class="header-title">
-            <i class="fa-solid fa-clipboard-list"></i> Task Manager
+            <a href="dashboard.php"><i class="fa-solid fa-clipboard-list"></i> Task Manager</a>
         </h1>
 
         <?php if (isset($_SESSION['username'])): ?>
