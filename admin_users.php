@@ -25,9 +25,8 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
 <body>
 
     <?php include 'includes/header.php'; ?>
-
+    <?php include 'includes/back_nav.php'; ?>
     <h2>Manage All Users</h2>
-
     <div class="table-wrapper">
         <table class="styled-table">
             <thead>

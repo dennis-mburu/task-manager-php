@@ -47,10 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php include 'includes/header.php'; ?>
-
+    <?php include 'includes/back_nav.php'; ?>
     <h2>Add New User</h2>
-    <p><a href="dashboard.php">← Back to Dashboard</a></p>
-
     <?php if ($error): ?>
         <p style="color:red;"><?php echo $error; ?></p>
     <?php elseif ($success): ?>
