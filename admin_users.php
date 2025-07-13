@@ -27,6 +27,13 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
     <?php include 'includes/header.php'; ?>
     <?php include 'includes/back_nav.php'; ?>
     <h2>Manage All Users</h2>
+    <?php if (isset($_GET['deleted'])): ?>
+        <p class="success">✅ User deleted successfully.</p>
+    <?php endif; ?>
+    <?php if (isset($_GET['updated'])): ?>
+        <p class="success">✅ User updated successfully.</p>
+    <?php endif; ?>
+
     <div class="table-wrapper">
         <table class="styled-table">
             <thead>
@@ -48,12 +55,8 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
                     echo "<td>" . htmlspecialchars($user['username']) . "</td>";
                     echo "<td>" . htmlspecialchars($user['email']) . "</td>";
                     echo "<td>" . htmlspecialchars($user['role']) . "</td>";
-                    echo "<td>
-                        <a href='edit_user.php?id=" . $user['id'] . "' class='btn small'>Edit</a>
-                      </td>";
-                    echo "<td>
-                        <button class='btn small danger' onclick='showDeleteModal(" . $user['id'] . ")'>Delete</button>
-                      </td>";
+                    echo "<td><a href='edit_user.php?id={$user['id']}' class='btn small'><i class='fa-solid fa-user-pen'></i>Edit</a></td>";
+                    echo "<td><button class='btn small danger' onclick='showDeleteModal({$user['id']})'><i class='fa-solid fa-trash'></i>Delete</button></td>";
                     echo "</tr>";
                     $counter++;
                 }

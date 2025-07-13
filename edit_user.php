@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $update = mysqli_query($conn, "UPDATE users SET username = '$newUsername', email = '$newEmail', role = '$newRole' WHERE id = $userId");
 
     if ($update) {
-        header("Location: admin_users.php");
+        header("Location: admin_users.php?updated=1");
         exit;
     } else {
         $error = "Failed to update user.";
