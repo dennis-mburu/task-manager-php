@@ -9,7 +9,28 @@ requireLogin();
 // Get session details
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
-$user_id = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
+
+// Fetch tasks
+if ($role === 'admin') {
+    $taskQuery = "SELECT tasks.*, users.email AS user_email 
+                  FROM tasks 
+                  JOIN users ON tasks.assigned_to = users.id 
+                  ORDER BY deadline ASC";
+} else {
+    $taskQuery = "SELECT tasks.*, users.email AS user_email 
+                  FROM tasks 
+                  JOIN users ON tasks.assigned_to = users.id 
+                  WHERE assigned_to = $userId 
+                  ORDER BY deadline ASC";
+}
+
+$taskResult = mysqli_query($conn, $taskQuery);
+
+// If admin, also fetch all users
+if ($role === 'admin') {
+    $userResult = mysqli_query($conn, "SELECT id, email, username, role FROM users ORDER BY id ASC");
+}
 ?>
 
 
@@ -36,49 +57,88 @@ $user_id = $_SESSION['user_id'];
         </ul>
 
         <h4>All Users</h4>
-        <ul>
-            <?php
-            $result = mysqli_query($conn, "SELECT id, username, email FROM users");
-            while ($row = mysqli_fetch_assoc($result)) {
-                echo "<li>" . htmlspecialchars($row['username']) . " (" . htmlspecialchars($row['email']) . ")</li>";
-            }
-            ?>
-        </ul>
+        <div class="table-wrapper">
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $ucount = 1;
+                    while ($user = mysqli_fetch_assoc($userResult)) {
+                        echo "<tr>";
+                        echo "<td>" . $ucount++ . "</td>";
+                        echo "<td>" . htmlspecialchars($user['username']) . "</td>";
+                        echo "<td>" . htmlspecialchars($user['email']) . "</td>";
+                        echo "<td>" . htmlspecialchars($user['role']) . "</td>";
+                        // echo "<td>" . "<a href='edit_user.php?id=" . $user['id'] . "' class='btn small'>Edit</a>" . "</td>";
+                        echo '<td><a href="edit_user.php?id=' . $user['id'] . '" class="btn small"><i class="fa-solid fa-pen-to-square"></i>Edit</a></td>';
+                        // echo "<td>" . "<a href='delete_user.php?id=" . $user['id'] . "' class='btn small danger'>Delete</a>" . "</td>";
+                        echo '<td><a href="delete_user.php?id=' . $user['id'] . '" class="btn small danger"><i class="fa-solid fa-trash"></i>Delete</a></td>';
+                        echo "</tr>";
+                    }
+
+
+                    if ($ucount === 1) {
+                        echo "<tr><td colspan='4'>No users found.</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     <?php endif; ?>
 
     <!-- This section is for all users, including admin -->
     <h3>Your Tasks</h3>
-    <ul>
-        <?php
-        $result = mysqli_query($conn, "SELECT * FROM tasks WHERE assigned_to = $user_id");
-        while ($task = mysqli_fetch_assoc($result)) {
-            echo "<li>";
-            echo "<strong>{$task['title']}</strong> – {$task['status']} (Due: {$task['deadline']})";
+    <div class="table-wrapper">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Task</th>
+                    <th>Assigned To</th>
+                    <th>Deadline</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $counter = 1;
+                while ($row = mysqli_fetch_assoc($taskResult)) {
+                    $status = $row['status'];
+                    $className = str_replace(' ', '', $status); // e.g. "In Progress" → "InProgress"
 
-            // 🎯 Only show status update form (button) if task is not Completed
-            if ($task['status'] !== 'Completed') {
-                echo "<form method='POST' action='update_task.php' style='display:inline; margin-left:10px;'>";
-                echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
-
-                // Set next status
-                $nextStatus = match ($task['status']) {
-                    'Pending' => 'In Progress',
-                    'In Progress' => 'Completed',
-                    default => null
-                };
-
-                if ($nextStatus) {
-                    echo "<input type='hidden' name='new_status' value='{$nextStatus}'>";
-                    echo "<button type='submit'>Mark as {$nextStatus}</button>";
+                    echo "<tr>";
+                    echo "<td>" . $counter++ . "</td>";
+                    echo "<td>" . htmlspecialchars($row['title']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['user_email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['deadline']) . "</td>";
+                    echo "<td><span class='status $className'>" . htmlspecialchars($status) . "</span></td>";
+                    echo "<td>
+                        <a href='update_task.php?id=" . $row['id'] . "' class='btn small'>Update</a>";
+                    if ($role === 'admin') {
+                        echo "<a href='delete_task.php?id=" . $row['id'] . "' class='btn small danger'>Delete</a>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
                 }
 
-                echo "</form>";
-            }
+                if ($counter === 1) {
+                    echo "<tr><td colspan='6'>No tasks found.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 
-            echo "</li>";
-        }
-        ?>
-    </ul>
     <?php include 'includes/footer.php'; ?>
 </body>
 
