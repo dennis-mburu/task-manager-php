@@ -1,13 +1,10 @@
 <?php
 include 'includes/db.php';
 include 'includes/auth.php';
-requireLogin();
+// Ensure only admin can access this page
+requireAdmin();
 
-if ($_SESSION['role'] !== 'admin') {
-    header("Location: dashboard.php");
-    exit;
-}
-
+// Fetch all users from the database
 $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER BY id ASC");
 ?>
 

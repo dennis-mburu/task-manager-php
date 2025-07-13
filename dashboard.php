@@ -32,13 +32,12 @@ $taskResult = mysqli_query($conn, "
     <?php include 'includes/header.php'; ?>
 
     <h2>Dashboard</h2>
-
     <?php if ($role === 'admin'): ?>
         <div class="admin-nav">
             <a href="add_user.php" class="btn"><i class="fa-solid fa-user-plus"></i>Add New User</a>
-            <a href="add_task.php" class="btn"><i class="fa-solid fa-list-check"></i>Assign Task</a>
+            <a href="add_task.php" class="btn"><i class="fa-solid fa-pen-to-square"></i>Assign Task</a>
             <a href="admin_users.php" class="btn"><i class="fa-solid fa-wrench"></i>Manage All Users</a>
-            <a href="admin_tasks.php" class="btn"><i class="fa-solid fa-pen-to-square"></i>Manage All Tasks</a>
+            <a href="admin_tasks.php" class="btn"><i class="fa-solid fa-list-check"></i>Manage All Tasks</a>
         </div>
     <?php endif; ?>
 
