@@ -1,12 +1,21 @@
-<header>
-    <h1>Task Manager</h1>
-    <?php if (isset($_SESSION['username'])): ?>
-        <div class=d-flex>
-            <h2>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h2>
-            <h3><a href="profile.php"><i class="fa-solid fa-user"></i>Manage Profile</a></h3>
-            <button class="logout-button">
-                <a href="logout.php"><i class="fa-solid fa-power-off"></i>Logout</a>
-            </button>
-        </div>
-    <?php endif; ?>
+<header class="header">
+    <div class="header-container">
+        <h1 class="header-title">
+            <i class="fa-solid fa-clipboard-list"></i> Task Manager
+        </h1>
+
+        <?php if (isset($_SESSION['username'])): ?>
+            <div class="user-actions">
+                <span class="welcome-text">👋 Hello, <?php echo htmlspecialchars($_SESSION['username']); ?></span>
+
+                <a href="profile.php" class="btn">
+                    <i class="fa-solid fa-user-gear"></i> Profile
+                </a>
+
+                <a href="logout.php" class="btn btn-logout">
+                    <i class="fa-solid fa-power-off"></i> Logout
+                </a>
+            </div>
+        <?php endif; ?>
+    </div>
 </header>

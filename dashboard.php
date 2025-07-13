@@ -28,77 +28,91 @@ $taskResult = mysqli_query($conn, "
 </head>
 
 <body>
-
     <?php include 'includes/header.php'; ?>
 
-    <h2>Dashboard</h2>
-    <?php if ($role === 'admin'): ?>
-        <div class="admin-nav">
-            <a href="add_user.php" class="btn"><i class="fa-solid fa-user-plus"></i>Add New User</a>
-            <a href="add_task.php" class="btn"><i class="fa-solid fa-pen-to-square"></i>Assign Task</a>
-            <a href="admin_users.php" class="btn"><i class="fa-solid fa-wrench"></i>Manage All Users</a>
-            <a href="admin_tasks.php" class="btn"><i class="fa-solid fa-list-check"></i>Manage All Tasks</a>
+    <section class="dashboard-header">
+        <div class="container">
+            <h2 class="page-title"><i class="fa-solid fa-gauge-high"></i> Dashboard</h2>
+
+            <?php if ($role === 'admin'): ?>
+                <nav class="admin-controls">
+                    <a href="add_user.php" class="btn">
+                        <i class="fa-solid fa-user-plus"></i> Add User
+                    </a>
+                    <a href="add_task.php" class="btn">
+                        <i class="fa-solid fa-pen-to-square"></i> Assign Task
+                    </a>
+                    <a href="admin_users.php" class="btn">
+                        <i class="fa-solid fa-users-gear"></i> Manage Users
+                    </a>
+                    <a href="admin_tasks.php" class="btn">
+                        <i class="fa-solid fa-list-check"></i> Manage Tasks
+                    </a>
+                </nav>
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
+    </section>
 
-    <h3>Your Tasks</h3>
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Task</th>
-                    <th>Assigned To</th>
-                    <th>Deadline</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $counter = 1;
-                while ($task = mysqli_fetch_assoc($taskResult)) {
-                    $status = $task['status'];
-                    $className = str_replace(' ', '', $status);
+    <section class="dashboard-tasks">
+        <div class="container">
+            <h3 class="section-title"><i class="fa-solid fa-list"></i> Your Tasks</h3>
 
-                    // If task is completed, strike through the row
-                    $rowClass = ($status === 'Completed') ? 'task-completed' : '';
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Task</th>
+                            <th>Assigned To</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $counter = 1;
+                        while ($task = mysqli_fetch_assoc($taskResult)) {
+                            $status = $task['status'];
+                            $className = str_replace(' ', '', $status);
+                            $rowClass = ($status === 'Completed') ? 'task-completed' : '';
 
-                    echo "<tr class='{$rowClass}'>";
-                    echo "<td>{$counter}</td>";
-                    echo "<td>" . htmlspecialchars($task['title']) . "</td>";
-                    echo "<td>" . htmlspecialchars($task['user_email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($task['deadline']) . "</td>";
-                    echo "<td><span class='status {$className}'>" . htmlspecialchars($status) . "</span></td>";
-                    echo "<td>";
+                            echo "<tr class='{$rowClass}'>";
+                            echo "<td>{$counter}</td>";
+                            echo "<td>" . htmlspecialchars($task['title']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['user_email']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['deadline']) . "</td>";
+                            echo "<td><span class='status {$className}'>" . htmlspecialchars($status) . "</span></td>";
+                            echo "<td>";
 
-                    // Show status update form (disabled if completed)
-                    $nextStatus = match ($status) {
-                        'Pending' => 'In Progress',
-                        'In Progress' => 'Completed',
-                        default => null
-                    };
+                            $nextStatus = match ($status) {
+                                'Pending' => 'In Progress',
+                                'In Progress' => 'Completed',
+                                default => null
+                            };
 
-                    if ($nextStatus) {
-                        echo "<form method='POST' action='update_task.php' style='display:inline'>";
-                        echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
-                        echo "<input type='hidden' name='new_status' value='{$nextStatus}'>";
-                        echo "<button type='submit'>Mark as {$nextStatus}</button>";
-                        echo "</form>";
-                    } else {
-                        // Completed: show disabled button
-                        echo "<button type='button' disabled>Completed</button>";
-                    }
+                            if ($nextStatus) {
+                                echo "<form method='POST' action='update_task.php' style='display:inline'>";
+                                echo "<input type='hidden' name='task_id' value='{$task['id']}'>";
+                                echo "<input type='hidden' name='new_status' value='{$nextStatus}'>";
+                                echo "<button type='submit'>Mark as {$nextStatus}</button>";
+                                echo "</form>";
+                            } else {
+                                echo "<button type='button' disabled>Completed</button>";
+                            }
 
-                    echo "</td></tr>";
-                    $counter++;
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+                            echo "</td></tr>";
+                            $counter++;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
     <?php include 'includes/footer.php'; ?>
 </body>
+
 
 </html>
