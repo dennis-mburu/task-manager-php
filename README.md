@@ -27,7 +27,7 @@ A lightweight PHP-based task management system designed for assigning, tracking,
 - Edit their own profile and change password
 
 ### 📊 General
-- Responsive UI with Dark Mode theme
+- Simple but tasteful responsive UI with Dark-Mode-ish theme
 - Role-based access control
 - Session-based login/logout system
 - Passwords securely hashed 
@@ -63,11 +63,33 @@ In the file located at: `includes/db.php` update the database connection credent
 
 ### 🔑 5. Login Credentials
 
-The SQL dump file includes four sample users, including two admins and two regular users. Use any of their credentials (emails and passwords) to log into the application and test its features. Inspect `task_manager.sql` to view the specific emails and default passwords.
+You have **two options** for accessing the application:
+
+#### ✅ Option 1: Create Your Own Account
+
+You can register a new user through the built-in **Sign Up** page:
+
+- Go to the `/signup.php` page on your local or deployed version.
+- Fill in the required details: **Username**, **Email**, **Password**, and select your **Role**.
+- If you choose **Admin**, you’ll be able to assign tasks to yourself or others.
+- If you choose **User**, you’ll only see and manage tasks assigned to you.
+
+This is the recommended option if you want to simulate a fresh user flow.
 
 ---
 
-## 🧪 Run the Application
+#### 🧪 Option 2: Use the Sample Accounts from the SQL Dump
+
+The `task_manager.sql` file includes **four sample users**:
+- **2 Admins** and **2 Users**, each with sample credentials.
+- You can use these to log in and test the full functionality right away.
+
+> 🔍 Check the `task_manager.sql` file directly to find the sample **emails** and default **passwords** for login.
+
+---
+
+
+## 6. 🧪 Run the Application
 
 With everything set up, launch your preferred browser and visit: `http://localhost/your-folder-path-being-served/index.php`. You should be greeted by the login page and be able to access the dashboard after logging in.
 
