@@ -1,28 +1,34 @@
-/*M!999999\- enable the sandbox mode */ 
--- MariaDB dump 10.19-11.8.1-MariaDB, for debian-linux-gnu (x86_64)
---
--- Host: localhost    Database: task_manager
--- ------------------------------------------------------
--- Server version	11.8.1-MariaDB-4
+-- Clean Dump File: Task Manager App
+-- MySQL/MariaDB compatible dump with proper FK order
+-- Passwords hashed using PASSWORD_DEFAULT (bcrypt, PHP 8+)
+-- Created: 2025-07-14
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*M!100616 SET @OLD_NOTE_VERBOSITY=@@NOTE_VERBOSITY, NOTE_VERBOSITY=0 */;
+-- Set up character encoding and session configs
+SET NAMES utf8mb4;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
---
--- Table structure for table `tasks`
---
+-- USERS TABLE FIRST (Parent table)
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('admin','user') DEFAULT 'user',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`) VALUES
+(1, 'AliceAdmin',   'alice@example.com',   '$2y$12$h6m2VHdtrXdr2yeghRp3T.oPQIkMUeiFwq3mbrJkL20904DudjTL2', 'admin', '2025-07-14 06:08:49'),
+(2, 'BobUser',      'bob@example.com',     '$2y$12$AeeFhmRg0flFhLNTideRbO0lbegZfsXrBZPGTVkGDjLE1B6yjlQYK', 'user',  '2025-07-14 06:08:49'),
+(3, 'CharlieAdmin', 'charlie@example.com', '$2y$12$TcNlj2DrLDumg9B6.YCGoulMfJ8AYzQHYDPFM0n48LBMNrh69IPtO', 'admin', '2025-07-14 06:08:49'),
+(4, 'DaisyUser',    'daisy@example.com',   '$2y$12$Mnfcd4B0YNaE6g15fB7BgOyKcJPfqhjPZw/4pPuU4T3Y997cYqVEO', 'user',  '2025-07-14 06:08:49');
+
+-- TASKS TABLE AFTER USERS
 DROP TABLE IF EXISTS `tasks`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
@@ -33,67 +39,30 @@ CREATE TABLE `tasks` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `assigned_to` (`assigned_to`),
-  CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `tasks`
---
+INSERT INTO `tasks` (`id`, `title`, `description`, `assigned_to`, `deadline`, `status`, `created_at`) VALUES
+(1,'Review Codebase','Go through the entire code structure.',1,'2025-07-14 12:00:00','Pending','2025-07-14 06:08:49'),
+(2,'Plan Sprint','Define tasks for upcoming sprint.',1,'2025-07-15 14:00:00','In Progress','2025-07-14 06:08:49'),
+(3,'Update Docs','Fix outdated documentation.',1,'2025-07-17 10:00:00','Completed','2025-07-14 06:08:49'),
+(4,'Meet with Team','Weekly stand-up and roadmap.',1,'2025-07-19 16:00:00','Pending','2025-07-14 06:08:49'),
+(5,'Optimize Queries','Improve performance of task fetch queries.',1,'2025-07-21 21:00:00','Pending','2025-07-14 06:08:49'),
+(6,'Fix Login Bug','Resolve incorrect login error message.',2,'2025-07-14 13:00:00','Pending','2025-07-14 06:08:49'),
+(7,'Style Dashboard','Improve dashboard UI layout.',2,'2025-07-15 11:00:00','In Progress','2025-07-14 06:08:49'),
+(8,'Add Logout Alert','Confirmation popup on logout.',2,'2025-07-17 09:00:00','Pending','2025-07-14 06:08:49'),
+(9,'Clean CSS','Refactor unused CSS.',2,'2025-07-19 16:00:00','Completed','2025-07-14 06:08:49'),
+(10,'Implement Tooltips','Add tooltips for buttons.',2,'2025-07-21 08:00:00','Pending','2025-07-14 06:08:49'),
+(11,'Setup Hosting','Deploy app to InfinityFree.',3,'2025-07-14 15:00:00','In Progress','2025-07-14 06:08:49'),
+(12,'Backup DB','Create a daily dump backup script.',3,'2025-07-15 11:00:00','Pending','2025-07-14 06:08:49'),
+(13,'Write Readme','Document project setup steps.',3,'2025-07-17 16:00:00','Pending','2025-07-14 06:08:49'),
+(14,'Add Admin Panel','Create CRUD interface for admins.',3,'2025-07-19 10:00:00','Completed','2025-07-14 06:08:49'),
+(15,'Security Review','Audit for password hashing & SQLi.',3,'2025-07-21 07:00:00','Pending','2025-07-14 06:08:49'),
+(16,'Test Task Creation','Ensure tasks are added properly.',4,'2025-07-14 00:00:00','Pending','2025-07-14 06:08:49'),
+(17,'Change Password UI','Improve password form feedback.',4,'2025-07-15 02:00:00','In Progress','2025-07-14 06:08:49'),
+(18,'Fix Broken Link','Profile page link not working.',4,'2025-07-17 16:00:00','Pending','2025-07-14 06:08:49'),
+(19,'Add Date Picker','Enhance deadline input field.',4,'2025-07-19 18:00:00','Pending','2025-07-14 06:08:49'),
+(20,'Test Email Alert','Confirm if email notification works.',4,'2025-07-21 21:00:00','Completed','2025-07-14 06:08:49');
 
-LOCK TABLES `tasks` WRITE;
-/*!40000 ALTER TABLE `tasks` DISABLE KEYS */;
-set autocommit=0;
-INSERT INTO `tasks` VALUES
-(1,'Complete Task Manager Project','Have a MVP of a task manager app',2,'2025-07-15 00:00:00','Pending','2025-07-12 06:37:03'),
-(2,'Add email notification','Notify users of account creation',1,'2025-07-15 00:00:00','Pending','2025-07-12 06:37:57'),
-(3,'Polish UI','Style all pages',3,'2025-07-14 00:00:00','Pending','2025-07-12 06:38:28'),
-(4,'Update datetime','Update datetime everywhere',1,'2025-07-12 00:00:00','Pending','2025-07-12 07:04:45'),
-(5,'Update task list ui','add countdown',1,'2025-07-12 00:13:00','Pending','2025-07-12 07:11:10');
-/*!40000 ALTER TABLE `tasks` ENABLE KEYS */;
-UNLOCK TABLES;
-commit;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` enum('admin','user') DEFAULT 'user',
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-set autocommit=0;
-INSERT INTO `users` VALUES
-(1,'Admin User','admin@example.com','admin123','admin','2025-07-12 04:26:17'),
-(2,'Jon Doe','jon@email.com','jon123','user','2025-07-12 06:13:31'),
-(3,'deno','deno@email.com','deno123','admin','2025-07-12 06:15:23');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-commit;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*M!100616 SET NOTE_VERBOSITY=@OLD_NOTE_VERBOSITY */;
-
--- Dump completed on 2025-07-12 10:21:24
+-- Restore FK checks
+SET foreign_key_checks = 1;
