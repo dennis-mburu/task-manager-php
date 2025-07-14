@@ -58,21 +58,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2><i class="fa-solid fa-lock"></i>Log In</h2>
     </div>
 
-    <!-- Display error message if any -->
-    <?php if ($error): ?>
-        <p style="color:red;"><?php echo $error; ?></p>
-    <?php endif; ?>
+    <!-- Login form -->
+    <div class="form-wrapper">
+        <form method="POST" action="index.php" class="form-auth">
 
-    <!-- Login Form -->
-    <form method="POST" action="index.php">
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+            <!-- Display error message if any -->
+            <?php if ($error): ?>
+                <p class="error"><?php echo $error; ?></p>
+            <?php endif; ?>
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+            <label>
+                Password
+                <input type="password" name="password" required>
+            </label>
 
-        <button type="submit">Login</button>
-    </form>
+            <button type="submit">Login</button>
+
+            <p class="form-helper">
+                Don't have an account? <a href="signup.php">Sign Up</a>
+            </p>
+        </form>
+    </div>
+
+
     <?php include 'includes/footer.php'; ?>
 </body>
 

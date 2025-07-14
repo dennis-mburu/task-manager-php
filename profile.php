@@ -67,24 +67,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="subtext">Update your personal info and change your password securely.</p>
     </div>
 
-    <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
-    <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>
 
-    <form method="POST">
-        <label>Username:
-            <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
-        </label>
-        <label>Email:
-            <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-        </label>
-        <label>Current Password:
-            <input type="password" name="current_password" required>
-        </label>
-        <label>New Password (leave blank to keep current password):
-            <input type="password" name="new_password">
-        </label>
-        <button type="submit" class="btn">Update Profile</button>
-    </form>
+    <div class="form-wrapper">
+
+
+        <form method="POST">
+            <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
+            <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>
+
+            <label>Username:
+                <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+            </label>
+            <label>Email:
+                <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+            </label>
+            <label>Current Password:
+                <input type="password" name="current_password" required>
+            </label>
+            <label>New Password (leave blank to keep current password):
+                <input type="password" name="new_password">
+            </label>
+            <button type="submit" class="btn">Update Profile</button>
+        </form>
+    </div>
 
     <?php include 'includes/footer.php'; ?>
     <script src="js/scripts.js"></script>
