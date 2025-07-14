@@ -10,30 +10,38 @@ requireAdmin();
 $error = "";
 $success = "";
 
-// If form was submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect form input and sanitize
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    // Clean and sanitize input
+    $username = mysqli_real_escape_string($conn, trim($_POST['username']));
+    $email = mysqli_real_escape_string($conn, trim($_POST['email']));
     $password = $_POST['password'];
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $role = $_POST['role'];
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Basic validation
     if (empty($username) || empty($email) || empty($password)) {
-        $error = "All fields are required.";
+        $error = "⚠️ All fields are required.";
     } else {
-        // Insert user into DB
-        $sql = "INSERT INTO users (username, email, password, role)
-                VALUES ('$username', '$email', '$hashedPassword', '$role')";
-
-        if (mysqli_query($conn, $sql)) {
-            $success = "✅ User added successfully.";
+        // Check for duplicate email
+        $check = mysqli_query($conn, "SELECT id FROM users WHERE email = '$email'");
+        if (mysqli_num_rows($check) > 0) {
+            $error = "⚠️ A user with that email already exists.";
         } else {
-            $error = "❌ Failed to add user: " . mysqli_error($conn);
+            // Insert user
+            $sql = "INSERT INTO users (username, email, password, role)
+                    VALUES ('$username', '$email', '$hashedPassword', '$role')";
+
+            if (mysqli_query($conn, $sql)) {
+                $success = "✅ User added successfully.";
+            } else {
+                $error = "❌ Failed to add user: " . mysqli_error($conn);
+            }
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
