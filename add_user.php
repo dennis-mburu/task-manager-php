@@ -55,31 +55,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="subtext">Create a new user account and assign their role in the team.</p>
     </div>
 
-    <?php if ($error): ?>
-        <p style="color:red;"><?php echo $error; ?></p>
-    <?php elseif ($success): ?>
-        <p class="success-message"><?php echo $success; ?></p>
-    <?php endif; ?>
 
     <!-- 📝 The form submits to the same page (POST method) -->
-    <form method="POST" action="add_user.php">
-        <label>Username:</label><br>
-        <input type="text" name="username" required><br><br>
 
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+    <div class="form-wrapper">
+        <form method="POST" action="add_user.php">
+            <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
+            <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>
+            <label>
+                Username:
+                <input type="text" name="username" required>
+            </label>
+            <label>
+                Email:
+                <input type="email" name="email" required>
+            </label>
+            <label>
+                Password:
+                <input type="password" name="password" required>
+            </label>
+            <label>
+                Role:
+                <select name="role" required>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </label>
 
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
+            <button type="submit">Add User</button>
 
-        <label>Role:</label><br>
-        <select name="role" required>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select><br><br>
+        </form>
+    </div>
 
-        <button type="submit">Add User</button>
-    </form>
+
+
     <?php include 'includes/footer.php'; ?>
 </body>
 
