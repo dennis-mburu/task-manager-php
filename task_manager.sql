@@ -21,6 +21,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- INSERT USERS
+-- alice password: alice123
+-- bob password: bob123
+-- charlie password: charlie123
+-- daisy password: daisy123
+-- Passwords are hashed using PASSWORD_DEFAULT (bcrypt, PHP 8+)
+-- Use PHP's password_hash() function to generate these hashes
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created_at`) VALUES
 (1, 'AliceAdmin',   'alice@example.com',   '$2y$12$h6m2VHdtrXdr2yeghRp3T.oPQIkMUeiFwq3mbrJkL20904DudjTL2', 'admin', '2025-07-14 06:08:49'),
 (2, 'BobUser',      'bob@example.com',     '$2y$12$AeeFhmRg0flFhLNTideRbO0lbegZfsXrBZPGTVkGDjLE1B6yjlQYK', 'user',  '2025-07-14 06:08:49'),
