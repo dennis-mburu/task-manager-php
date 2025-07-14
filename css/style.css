@@ -110,7 +110,7 @@ body {
 .container {
   max-width: 1100px;
   margin: auto;
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 /* Page Title */
@@ -151,7 +151,7 @@ body {
 .dashboard-tasks {
   /* background-color: #f5f5f5; */
   background-color: var(--bg-color);
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 /* End of dashboard styles */

@@ -104,6 +104,9 @@ $taskResult = mysqli_query($conn, "
                             echo "</td></tr>";
                             $counter++;
                         }
+                        if ($counter === 1) {
+                            echo "<tr><td colspan='7'>No tasks found.</td></tr>";
+                        }
                         ?>
                     </tbody>
                 </table>

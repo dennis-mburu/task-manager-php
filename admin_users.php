@@ -27,49 +27,56 @@ $result = mysqli_query($conn, "SELECT id, username, email, role FROM users ORDER
         <h2><i class="fa-solid fa-wrench"></i>Manage Users</h2>
         <p class="subtext">View, edit, or remove users from the system.</p>
     </div>
-    <?php if (isset($_GET['deleted'])): ?>
-        <p class="success">✅ User deleted successfully.</p>
-    <?php endif; ?>
-    <?php if (isset($_GET['updated'])): ?>
-        <p class="success">✅ User updated successfully.</p>
-    <?php endif; ?>
 
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>User Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $counter = 1;
-                while ($user = mysqli_fetch_assoc($result)) {
-                    echo "<tr>";
-                    echo "<td>{$counter}</td>";
-                    echo "<td>" . htmlspecialchars($user['username']) . "</td>";
-                    echo "<td>" . htmlspecialchars($user['email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($user['role']) . "</td>";
-                    echo "<td><a href='edit_user.php?id={$user['id']}' class='btn small'><i class='fa-solid fa-user-pen'></i>Edit</a></td>";
-                    echo "<td><button class='btn small danger' onclick='showDeleteModal({$user['id']})'><i class='fa-solid fa-trash'></i>Delete</button></td>";
-                    echo "</tr>";
-                    $counter++;
-                }
 
-                if ($counter === 1) {
-                    echo "<tr><td colspan='5'>No users found.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+    <section class="dashboard-tasks">
+        <div class="container">
+            <?php if (isset($_GET['deleted'])): ?>
+                <p class="success">✅ User deleted successfully.</p>
+            <?php endif; ?>
+            <?php if (isset($_GET['updated'])): ?>
+                <p class="success">✅ User updated successfully.</p>
+            <?php endif; ?>
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $counter = 1;
+                        while ($user = mysqli_fetch_assoc($result)) {
+                            echo "<tr>";
+                            echo "<td>{$counter}</td>";
+                            echo "<td>" . htmlspecialchars($user['username']) . "</td>";
+                            echo "<td>" . htmlspecialchars($user['email']) . "</td>";
+                            echo "<td>" . htmlspecialchars($user['role']) . "</td>";
+                            echo "<td><a href='edit_user.php?id={$user['id']}' class='btn small'><i class='fa-solid fa-user-pen'></i>Edit</a></td>";
+                            echo "<td><button class='btn small danger' onclick='showDeleteModal({$user['id']})'><i class='fa-solid fa-trash'></i>Delete</button></td>";
+                            echo "</tr>";
+                            $counter++;
+                        }
 
-    <!-- Custom Confirmation Modal -->
+                        if ($counter === 1) {
+                            echo "<tr><td colspan='5'>No users found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- User delete Confirmation Modal -->
     <div id="confirmModal" class="modal hidden">
         <div class="modal-content">
             <p><i class="fa-solid fa-triangle-exclamation" style="color: red"></i>Are you sure you want to delete this user? This action will also delete all tasks assigned to this user, and cannot be undone!</p>

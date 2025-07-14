@@ -30,59 +30,66 @@ $result = mysqli_query($conn, "
 <body>
 
     <?php include 'includes/header.php'; ?>
-    <div class="manage-page-title">
+    <section class="manage-page-title">
         <?php include 'includes/back_nav.php'; ?>
         <h2><i class="fa-solid fa-list-check"></i>Manage Tasks</h2>
         <p class="subtext">Browse or delete all assigned tasks across the team.</p>
-    </div>
+    </section>
 
-    <?php if (isset($_GET['deleted'])): ?>
-        <p class="success">✅ Task deleted successfully.</p>
-    <?php endif; ?>
 
-    <div class="table-wrapper">
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Task</th>
-                    <th>Assigned To</th>
-                    <th>Email</th>
-                    <th>Deadline</th>
-                    <th>Status</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $counter = 1;
-                while ($task = mysqli_fetch_assoc($result)) {
-                    $statusClass = str_replace(' ', '', $task['status']);
-                    echo "<tr>";
-                    echo "<td>{$counter}</td>";
-                    echo "<td>" . htmlspecialchars($task['title']) . "</td>";
-                    echo "<td>" . htmlspecialchars($task['username']) . "</td>";
-                    echo "<td>" . htmlspecialchars($task['email']) . "</td>";
-                    echo "<td>" . htmlspecialchars($task['deadline']) . "</td>";
-                    echo "<td><span class='status {$statusClass}'>" . htmlspecialchars($task['status']) . "</span></td>";
-                    echo "<td>
+    <section class="dashboard-tasks">
+        <div class="container">
+            <?php if (isset($_GET['deleted'])): ?>
+                <p class="success">✅ Task deleted successfully.</p>
+            <?php endif; ?>
+
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Task</th>
+                            <th>Assigned To</th>
+                            <th>Email</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $counter = 1;
+                        while ($task = mysqli_fetch_assoc($result)) {
+                            $statusClass = str_replace(' ', '', $task['status']);
+                            echo "<tr>";
+                            echo "<td>{$counter}</td>";
+                            echo "<td>" . htmlspecialchars($task['title']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['username']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['email']) . "</td>";
+                            echo "<td>" . htmlspecialchars($task['deadline']) . "</td>";
+                            echo "<td><span class='status {$statusClass}'>" . htmlspecialchars($task['status']) . "</span></td>";
+                            echo "<td>
                         <button class='btn small danger' onclick='showDeleteTaskModal({$task['id']})'>
                             <i class='fa-solid fa-trash'></i>Delete
                         </button>
                       </td>";
-                    echo "</tr>";
-                    $counter++;
-                }
+                            echo "</tr>";
+                            $counter++;
+                        }
 
-                if ($counter === 1) {
-                    echo "<tr><td colspan='7'>No tasks found.</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
+                        if ($counter === 1) {
+                            echo "<tr><td colspan='7'>No tasks found.</td></tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
 
-    <!-- Task Delete Modal -->
+        </div>
+    </section>
+
+
+    <!-- Task Delete Confirmation Modal -->
     <div id="deleteTaskModal" class="modal hidden">
         <div class="modal-content">
             <p><i class="fa-solid fa-triangle-exclamation" style="color: red"></i>Are you sure you want to delete this task?</p>
