@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="form-wrapper">
 
-
         <form method="POST">
             <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
             <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>

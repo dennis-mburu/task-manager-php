@@ -58,27 +58,30 @@ if (!$user) {
         <p class="subtext">Update user's personal info.</p>
     </div>
 
-    <?php if (isset($error)): ?>
-        <p class="error"><?php echo $error; ?></p>
-    <?php endif; ?>
 
-    <form method="POST" class="form-card">
-        <label>Username:
-            <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
-        </label>
-        <label>Email:
-            <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-        </label>
+    <div class="form-wrapper">
+        <form method="POST">
+            <?php if (isset($error)): ?>
+                <p class="error"><?php echo $error; ?></p>
+            <?php endif; ?>
+            <label>Username:
+                <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+            </label>
+            <label>Email:
+                <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+            </label>
 
-        <label>Role:
-            <select name="role">
-                <option value="user" <?php if ($user['role'] === 'user') echo 'selected'; ?>>User</option>
-                <option value="admin" <?php if ($user['role'] === 'admin') echo 'selected'; ?>>Admin</option>
-            </select>
-        </label>
+            <label>Role:
+                <select name="role">
+                    <option value="user" <?php if ($user['role'] === 'user') echo 'selected'; ?>>User</option>
+                    <option value="admin" <?php if ($user['role'] === 'admin') echo 'selected'; ?>>Admin</option>
+                </select>
+            </label>
 
-        <button type="submit" class="btn">💾 Update User</button>
-    </form>
+            <button type="submit" class="btn">💾 Update User</button>
+        </form>
+
+    </div>
 
     <?php include 'includes/footer.php'; ?>
 </body>

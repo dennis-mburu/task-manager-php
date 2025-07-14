@@ -196,7 +196,6 @@ i {
 /* Wrapper to center form with page background */
 .form-wrapper {
   background-color: var(--bg-color); /* app background */
-  /* min-height: 100vh; */
   display: flex;
   align-items: center;
   justify-content: center;

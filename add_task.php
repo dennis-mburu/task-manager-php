@@ -67,37 +67,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <h2><i class="fa-solid fa-pen-to-square"></i>Assign New task </h2>
         <p class="subtext">Assign a new task to a team member and set a deadline.</p>
     </div>
-    <?php if ($error): ?>
-        <p style="color:red;"><?php echo $error; ?></p>
-    <?php elseif ($success): ?>
-        <p class="success-message"><?php echo $success; ?></p>
-    <?php endif; ?>
 
     <!-- 📝 Task creation form -->
-    <form method="POST" action="add_task.php">
-        <label>Task Title:</label><br>
-        <input type="text" name="title" required><br><br>
+    <div class="form-wrapper">
+        <form method="POST" action="add_task.php">
+            <?php if ($success): ?><p class="success"><?php echo $success; ?></p><?php endif; ?>
+            <?php if ($error): ?><p class="error"><?php echo $error; ?></p><?php endif; ?>
+            <label>
+                Task Title:
+                <input type="text" name="title" required>
+            </label>
 
-        <label>Description:</label><br>
-        <textarea name="description" rows="4" cols="40"></textarea><br><br>
+            <label>
+                Description:
+                <textarea name="description" rows="4" cols="40"></textarea>
+            </label>
 
-        <label>Assign To:</label><br>
-        <select name="assigned_to" required>
-            <option value="">-- Select User --</option>
-            <?php
-            // 🧠 Query all users to populate dropdown
-            $users = mysqli_query($conn, "SELECT id, username FROM users");
-            while ($user = mysqli_fetch_assoc($users)) {
-                echo "<option value=\"{$user['id']}\">{$user['username']}</option>";
-            }
-            ?>
-        </select><br><br>
+            <label>
+                Assign To:
+                <select name="assigned_to" required>
+                    <option value="">-- Select User --</option>
+                    <?php
+                    // 🧠 Query all users to populate dropdown
+                    $users = mysqli_query($conn, "SELECT id, username FROM users");
+                    while ($user = mysqli_fetch_assoc($users)) {
+                        echo "<option value=\"{$user['id']}\">{$user['username']}</option>";
+                    }
+                    ?>
+                </select>
+            </label>
 
-        <label>Deadline:</label><br>
-        <input type="datetime-local" name="deadline" required><br><br>
+            <label>
+                Deadline:
+                <input type="datetime-local" name="deadline" required>
+            </label>
 
-        <button type="submit">Assign Task</button>
-    </form>
+            <button type="submit">Assign Task</button>
+
+        </form>
+    </div>
+
     <?php include 'includes/footer.php'; ?>
 </body>
 
