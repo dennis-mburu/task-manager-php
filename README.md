@@ -55,13 +55,32 @@ Ensure that you have the following software installed and configured:
 
 ### 🗄 3. Create the Database
 
-Log into your local MySQL database and create a new database named: **task_manager**
+> ⚠️ _Note: To run the application successfully, the database must be initialized with the required tables. The `sqldump/task_manager.sql` file provides a pre-built database structure/schema (users and tasks tables) along with optional sample data to get you started. Without importing this file, the app may throw errors due to missing tables_
 
-Once the database is created, import the `task_manager.sql` file (sql dumpfile) provided in the root of the project. This SQL file will automatically create the necessary tables (`users`, `tasks`) and populate them with sample users and tasks for testing.
+- Log into your local MySQL database and create a new database named: **task_manager**
+
+```bash
+mysql -u root -p #log in to mysql. Replace root with your MySQL username if different.
+```
+
+- Inside your mysql terminal, create a new database called task_manager then exit
+
+```sql
+CREATE DATABASE task_manager;
+EXIT;
+```
+
+- Import the dumpfile into the newly created database.
+
+```bash
+mysql -u root -p task_manager < sqldump/task_manager.sql
+```
 
 ### 🔐 4. Configure Database Connection
 
 In the file located at: `includes/db.php` update the database connection credentials (`host`, `user`, `password`, `db`) to match your local environment settings. This allows the application to communicate with your MySQL database.
+
+> _Note: To avoid hard coding credentials, use a config file and add it to the .gitignore. An example config file and how to use it is included in the `includes/db.php` file as comments_
 
 ### 🔑 5. Login Credentials
 
@@ -163,3 +182,7 @@ New users can register directly through this form to create either a user or adm
 Accessible to all users (Admins, normal users, and the public).This is the starting point for authentication into the app, and Includes a link to the signup page for completely new users.
 ![Landing Page](screenshots/login.png)
 
+
+### 🛡️ License
+
+This project is licensed under the [MIT License](LICENSE.md).

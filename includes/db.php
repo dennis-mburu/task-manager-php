@@ -5,6 +5,14 @@
 // Load database credentials from config file (to avoid hardcoding sensitive information)
 $config = parse_ini_file("config.ini");
 
+// Note: Make sure to create a config.ini file with your database credentials (in the same directory as db.php).
+// Example config.ini content:
+// ; config.ini
+// host = "localhost"
+// db_user = "your_db_username"
+// db_pass = "your_db_password"
+// db_name = "your_db_name"
+
 // Define DB connection variables
 $host = $config['host'];    // Where your DB server is (localhost if running locally)
 $db_user = $config['db_user'];  // MySQL username (you created this)
