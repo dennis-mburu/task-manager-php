@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
       </label>
 
-      <button type="submit">💾 Sign Up</button>
+      <button type="submit"><i class="fa-solid fa-floppy-disk"></i> Sign Up</button>
 
       <p class="form-helper" style="margin-top: 1rem;">Already have an account? <a href="index.php">Log in here</a></p>
 

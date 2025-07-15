@@ -78,7 +78,7 @@ if (!$user) {
                 </select>
             </label>
 
-            <button type="submit" class="btn">💾 Update User</button>
+            <button type="submit" class="btn"><i class="fa-solid fa-floppy-disk"></i> Update User</button>
         </form>
 
     </div>

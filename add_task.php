@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="datetime-local" name="deadline" required>
             </label>
 
-            <button type="submit">💾 Assign Task</button>
+            <button type="submit"><i class="fa-regular fa-floppy-disk"></i> Assign Task</button>
 
         </form>
     </div>
