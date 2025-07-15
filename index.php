@@ -56,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <div class="manage-page-title">
         <h2><i class="fa-solid fa-lock"></i>Log In</h2>
+        <p class="subtext">Use your existing credentials to log in.</p>
     </div>
 
     <!-- Login form -->

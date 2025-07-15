@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
             </label>
 
-            <button type="submit">Add User</button>
+            <button type="submit">💾 Add User</button>
 
         </form>
     </div>

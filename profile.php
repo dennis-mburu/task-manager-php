@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label>New Password (leave blank to keep current password):
                 <input type="password" name="new_password">
             </label>
-            <button type="submit" class="btn">Update Profile</button>
+            <button type="submit" class="btn">💾 Update Profile</button>
         </form>
     </div>
 
